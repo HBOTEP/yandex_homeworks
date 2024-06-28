@@ -11,7 +11,10 @@ final class FileCache {
     private let fileStorageStrategy: FileStorageStrategy
     
     // MARK: - Lifecycle
-    init(todoList: [TodoItem] = [], fileStorageStrategy: FileStorageStrategy) {
+    init(
+        todoList: [TodoItem] = [],
+        fileStorageStrategy: FileStorageStrategy = JSONFileStorageStrategy()
+    ) {
         self.todoList = todoList
         self.fileStorageStrategy = fileStorageStrategy
     }

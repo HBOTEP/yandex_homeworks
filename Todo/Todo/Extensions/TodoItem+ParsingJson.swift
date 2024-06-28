@@ -17,7 +17,8 @@ extension TodoItem {
             "id": id,
             "text": text,
             "done": done,
-            "creationDate": formatter.string(from: creationDate)
+            "creationDate": formatter.string(from: creationDate),
+            "hex": hex
         ]
         
         if importance != .ordinary {
@@ -49,7 +50,8 @@ extension TodoItem {
               let text = jsonObject["text"] as? String,
               let done = jsonObject["done"] as? Bool,
               let creationDateString = jsonObject["creationDate"] as? String,
-              let creationDate = formatter.date(from: creationDateString) else {
+              let creationDate = formatter.date(from: creationDateString),
+              let hex = jsonObject["hex"] as? String else {
             return nil
         }
         
@@ -68,7 +70,8 @@ extension TodoItem {
             deadline: deadline,
             done: done,
             creationDate: creationDate,
-            modificationDate: modificationDate
+            modificationDate: modificationDate,
+            hex: hex
         )
     }
 }

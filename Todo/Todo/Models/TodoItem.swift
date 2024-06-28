@@ -23,6 +23,7 @@ struct TodoItem {
     let done: Bool
     let creationDate: Date
     let modificationDate: Date?
+    let hex: String
     
     // MARK: - Lifecycle
     init(
@@ -32,7 +33,8 @@ struct TodoItem {
         deadline: Date? = nil,
         done: Bool = false,
         creationDate: Date = Date(),
-        modificationDate: Date? = nil
+        modificationDate: Date? = nil,
+        hex: String = "FFFFFF"
     ) {
         self.id = id
         self.text = text
@@ -41,5 +43,6 @@ struct TodoItem {
         self.done = done
         self.creationDate = creationDate
         self.modificationDate = modificationDate
+        self.hex = hex
     }
 }
