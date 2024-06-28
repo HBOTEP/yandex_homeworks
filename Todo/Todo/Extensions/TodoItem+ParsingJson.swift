@@ -24,11 +24,11 @@ extension TodoItem {
             result["importance"] = importance.rawValue
         }
         
-        if let deadline = deadline {
+        if let deadline {
             result["deadline"] = formatter.string(from: deadline)
         }
         
-        if let modificationDate = modificationDate {
+        if let modificationDate {
             result["modificationDate"] = formatter.string(from: modificationDate)
         }
         

@@ -21,7 +21,9 @@ class CSVFileStorageStrategy: FileStorageStrategy {
         
         do {
             try csvString.write(to: url, atomically: true, encoding: .utf8)
-        } catch { }
+        } catch { 
+            print(error)
+        }
     }
     
     func load(from filename: String) -> [TodoItem] {
@@ -43,7 +45,9 @@ class CSVFileStorageStrategy: FileStorageStrategy {
                     data.append(item)
                 }
             }
-        } catch { }
+        } catch {
+            print(error)
+        }
         return data
     }
 }
