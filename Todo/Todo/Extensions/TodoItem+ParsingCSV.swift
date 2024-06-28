@@ -14,16 +14,8 @@ extension TodoItem {
         formatter.timeZone = .current
         
         func escape(_ text: String) -> String {
-<<<<<<< HEAD
             guard text.contains(",") || text.contains("\"") || text.contains("\n") else { return text }
             return "\"\(text.replacingOccurrences(of: "\"", with: "\"\""))\""
-=======
-            if text.contains(",") || text.contains("\"") || text.contains("\n") {
-                return "\"\(text.replacingOccurrences(of: "\"", with: "\"\""))\""
-            } else {
-                return text
-            }
->>>>>>> 6b56f7f3fc43a2ed05acb6e87986352041f128bf
         }
         
         var components: [String] = [
@@ -38,22 +30,14 @@ extension TodoItem {
         } else {
             components.insert("", at: 2)
         }
-        
-<<<<<<< HEAD
+
         if let deadline {
-=======
-        if let deadline = deadline {
->>>>>>> 6b56f7f3fc43a2ed05acb6e87986352041f128bf
             components.insert(formatter.string(from: deadline), at: 3)
         } else {
             components.insert("", at: 3)
         }
-        
-<<<<<<< HEAD
+
         if let modificationDate {
-=======
-        if let modificationDate = modificationDate {
->>>>>>> 6b56f7f3fc43a2ed05acb6e87986352041f128bf
             components.append(formatter.string(from: modificationDate))
         } else {
             components.append("")
@@ -64,7 +48,6 @@ extension TodoItem {
     
     // MARK: - Methods
     static func parse(csv: String) -> TodoItem? {
-<<<<<<< HEAD
         do {
             let formatter = ISO8601DateFormatter()
             formatter.timeZone = .current
@@ -111,50 +94,5 @@ extension TodoItem {
             print(error)
             return nil
         }
-=======
-        let formatter = ISO8601DateFormatter()
-        formatter.timeZone = .current
-        
-        func unescape(_ text: String) -> String {
-            if text.hasPrefix("\"") && text.hasSuffix("\"") {
-                let startIndex = text.index(after: text.startIndex)
-                let endIndex = text.index(before: text.endIndex)
-                return String(text[startIndex..<endIndex]).replacingOccurrences(of: "\"\"", with: "\"")
-            } else {
-                return text
-            }
-        }
-        
-        let pattern = "(?<=^|,)(\"(?:[^\"]|\"\")*\"|[^,]*)"
-        let regex = try! NSRegularExpression(pattern: pattern, options: [])
-        let matches = regex.matches(in: csv, options: [], range: NSRange(csv.startIndex..., in: csv))
-        
-        let components = matches.map { match -> String in
-            let range = Range(match.range, in: csv)!
-            return String(csv[range])
-        }.map(unescape)
-        
-        guard components.count >= 6 else { return nil }
-        
-        let id = components[0]
-        let text = components[1]
-        let importanceString = components[2]
-        let importance = importanceString.isEmpty ? .ordinary : Importance(rawValue: importanceString) ?? .ordinary
-        
-        let deadlineString = components[3]
-        let deadline = deadlineString.isEmpty ? nil : formatter.date(from: deadlineString)
-        
-        let done = (components[4] as NSString).boolValue
-        
-        let creationDateString = components[5]
-        guard let creationDate = formatter.date(from: creationDateString) else {
-            return nil
-        }
-        
-        let modificationDateString = components.count > 6 ? components[6] : ""
-        let modificationDate = modificationDateString.isEmpty ? nil : formatter.date(from: modificationDateString)
-        
-        return TodoItem(id: id, text: text, importance: importance, deadline: deadline, done: done, creationDate: creationDate, modificationDate: modificationDate)
->>>>>>> 6b56f7f3fc43a2ed05acb6e87986352041f128bf
     }
 }

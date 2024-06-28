@@ -10,15 +10,9 @@ import Foundation
 struct TodoItem {
     // MARK: - Enum Importance
     enum Importance: String {
-<<<<<<< HEAD
         case unimportant
         case ordinary
         case important
-=======
-        case unimportant = "unimportant"
-        case ordinary = "ordinary"
-        case important = "important"
->>>>>>> 6b56f7f3fc43a2ed05acb6e87986352041f128bf
     }
     
     // MARK: - Fields

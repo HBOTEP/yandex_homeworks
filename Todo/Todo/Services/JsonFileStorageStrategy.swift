@@ -14,18 +14,14 @@ class JSONFileStorageStrategy: FileStorageStrategy {
             in: .userDomainMask
         ).first?.appendingPathComponent(filename) else { return }
         
-        let jsonArray: [Any] = data.map { $0.json }
+        let jsonArray: [Any] = data.map(\.json)
 
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: jsonArray, options: .prettyPrinted)
             try jsonData.write(to: url)
-<<<<<<< HEAD
-        } catch { 
+        } catch {
             print(error)
         }
-=======
-        } catch { }
->>>>>>> 6b56f7f3fc43a2ed05acb6e87986352041f128bf
     }
 
     func load(from filename: String) -> [TodoItem] {
@@ -42,13 +38,9 @@ class JSONFileStorageStrategy: FileStorageStrategy {
             ) as? [Any] {
                 return jsonArray.compactMap(TodoItem.parse(json:))
             }
-<<<<<<< HEAD
-        } catch { 
+        } catch {
             print(error)
         }
-=======
-        } catch { }
->>>>>>> 6b56f7f3fc43a2ed05acb6e87986352041f128bf
         return []
     }
 }
