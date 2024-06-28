@@ -19,7 +19,9 @@ class JSONFileStorageStrategy: FileStorageStrategy {
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: jsonArray, options: .prettyPrinted)
             try jsonData.write(to: url)
-        } catch { }
+        } catch { 
+            print(error)
+        }
     }
 
     func load(from filename: String) -> [TodoItem] {
@@ -36,7 +38,9 @@ class JSONFileStorageStrategy: FileStorageStrategy {
             ) as? [Any] {
                 return jsonArray.compactMap(TodoItem.parse(json:))
             }
-        } catch { }
+        } catch { 
+            print(error)
+        }
         return []
     }
 }
