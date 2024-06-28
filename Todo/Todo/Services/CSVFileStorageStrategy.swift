@@ -15,15 +15,23 @@ class CSVFileStorageStrategy: FileStorageStrategy {
         ).first?.appendingPathComponent(filename) else { return }
         
         var csvArray: [String] = ["id,text,importance,deadline,done,creationDate,modificationDate"]
+<<<<<<< HEAD
         csvArray.append(contentsOf: data.map(\.csv))
+=======
+        csvArray.append(contentsOf: data.map { $0.csv })
+>>>>>>> 6b56f7f3fc43a2ed05acb6e87986352041f128bf
         
         let csvString = csvArray.joined(separator: "\n")
         
         do {
             try csvString.write(to: url, atomically: true, encoding: .utf8)
+<<<<<<< HEAD
         } catch { 
             print(error)
         }
+=======
+        } catch { }
+>>>>>>> 6b56f7f3fc43a2ed05acb6e87986352041f128bf
     }
     
     func load(from filename: String) -> [TodoItem] {
@@ -45,9 +53,13 @@ class CSVFileStorageStrategy: FileStorageStrategy {
                     data.append(item)
                 }
             }
+<<<<<<< HEAD
         } catch { 
             print(error)
         }
+=======
+        } catch { }
+>>>>>>> 6b56f7f3fc43a2ed05acb6e87986352041f128bf
         return data
     }
 }
