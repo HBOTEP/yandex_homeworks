@@ -7,12 +7,23 @@
 
 import Foundation
 
-struct TodoItem {
+struct TodoItem: Identifiable {
     // MARK: - Enum Importance
-    enum Importance: String {
+    enum Importance: String, Comparable {
         case unimportant
         case ordinary
         case important
+        
+        static func < (lhs: Importance, rhs: Importance) -> Bool {
+            switch (lhs, rhs) {
+            case (.important, .ordinary), (.important, .unimportant), (.ordinary, .unimportant):
+                return false
+            case (.ordinary, .important), (.unimportant, .important), (.unimportant, .ordinary):
+                return true
+            default:
+                return false
+            }
+        }
     }
     
     // MARK: - Fields

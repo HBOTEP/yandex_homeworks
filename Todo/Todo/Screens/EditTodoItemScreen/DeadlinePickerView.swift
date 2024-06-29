@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DeadlinePickerView: View {
     @Binding var deadlineOn: Bool
-    @Binding var deadline: Date
+    @Binding var deadline: Date?
     @State private var showDatePicker: Bool = false
     
     var body: some View {
@@ -20,11 +20,11 @@ struct DeadlinePickerView: View {
                         .foregroundColor(.primary)
                     if deadlineOn {
                         Button(action: {
-                            withAnimation{
+                            withAnimation {
                                 showDatePicker.toggle()
                             }
                         }) {
-                            Text(deadline, style: .date)
+                            Text(deadline ?? Date().addingTimeInterval(86400), style: .date)
                                 .foregroundColor(.blue)
                         }
                     }
@@ -37,7 +37,14 @@ struct DeadlinePickerView: View {
             
             if deadlineOn && showDatePicker {
                 Divider()
-                DatePicker("", selection: $deadline, in: Date()..., displayedComponents: .date)
+                DatePicker(
+                    "",
+                    selection: $deadline.replacingNilWith(
+                        Date().addingTimeInterval(86400)
+                    ),
+                    in: Date()...,
+                    displayedComponents: .date
+                )
                     .datePickerStyle(.graphical)
                     .clipped()
                     .onChange(of: deadline) { _, _ in
@@ -50,9 +57,18 @@ struct DeadlinePickerView: View {
     }
 }
 
+extension Binding where Value == Date? {
+    func replacingNilWith(_ value: Date) -> Binding<Date> {
+        Binding<Date>(
+            get: { self.wrappedValue ?? value },
+            set: { self.wrappedValue = $0 }
+        )
+    }
+}
+
 struct DeadlinePickerView_Preview: View {
-    @State private var deadlineOn = true
-    @State private var deadline = Date().addingTimeInterval(86400)
+    @State private var deadlineOn: Bool = true
+    @State private var deadline: Date? = Date().addingTimeInterval(86400)
     
     var body: some View {
         DeadlinePickerView(deadlineOn: $deadlineOn, deadline: $deadline)

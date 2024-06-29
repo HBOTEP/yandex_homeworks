@@ -25,11 +25,11 @@ extension TodoItem {
             result["importance"] = importance.rawValue
         }
         
-        if let deadline = deadline {
+        if let deadline {
             result["deadline"] = formatter.string(from: deadline)
         }
         
-        if let modificationDate = modificationDate {
+        if let modificationDate {
             result["modificationDate"] = formatter.string(from: modificationDate)
         }
         
@@ -50,10 +50,11 @@ extension TodoItem {
               let text = jsonObject["text"] as? String,
               let done = jsonObject["done"] as? Bool,
               let creationDateString = jsonObject["creationDate"] as? String,
-              let creationDate = formatter.date(from: creationDateString),
-              let hex = jsonObject["hex"] as? String else {
+              let creationDate = formatter.date(from: creationDateString) else {
             return nil
         }
+        
+        let hex = jsonObject["hex"] as? String ?? "FFFFFF"
         
         let importanceString = jsonObject["importance"] as? String ?? Importance.ordinary.rawValue
         guard let importance = Importance(rawValue: importanceString) else {
