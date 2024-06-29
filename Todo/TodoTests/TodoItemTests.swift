@@ -49,7 +49,8 @@ final class TodoItemTests: XCTestCase {
             deadline: nil,
             done: false,
             creationDate: Date(),
-            modificationDate: nil
+            modificationDate: nil,
+            hex: "000000"
         )
         
         guard let jsonData = todoItem.json as? Data else {
@@ -67,6 +68,7 @@ final class TodoItemTests: XCTestCase {
         XCTAssertEqual(jsonObject["done"] as? Bool, todoItem.done)
         XCTAssertNotNil(jsonObject["creationDate"])
         XCTAssertEqual(jsonObject["importance"] as? String, todoItem.importance.rawValue)
+        XCTAssertEqual(jsonObject["hex"] as? String, todoItem.hex)
     }
     
     // MARK: - JSON Deserialization
@@ -82,7 +84,8 @@ final class TodoItemTests: XCTestCase {
                 "text": "Test task",
                 "importance": "important",
                 "done": false,
-                "creationDate": "\(formatter.string(from: creationDate))"
+                "creationDate": "\(formatter.string(from: creationDate))",
+                "hex": "000000"
             }
             """
         
@@ -105,6 +108,7 @@ final class TodoItemTests: XCTestCase {
             creationDate.timeIntervalSinceReferenceDate,
             accuracy: 1.0
         )
+        XCTAssertEqual(todoItem.hex, "000000")
     }
     
     // MARK: - CSV Serialization
@@ -121,10 +125,12 @@ final class TodoItemTests: XCTestCase {
             deadline: nil,
             done: false,
             creationDate: creationDate,
-            modificationDate: nil
+            modificationDate: nil,
+            hex: "000000"
         )
         
         let csvString = todoItem.csv
+        
         var expectedCsv = [
             todoItem.id,
             "\"Test, task\"",
@@ -132,6 +138,7 @@ final class TodoItemTests: XCTestCase {
             "",
             "false",
             formatter.string(from: creationDate),
+            "000000",
             "",
             ""
         ].joined(separator: ",")
@@ -151,7 +158,7 @@ final class TodoItemTests: XCTestCase {
         let modificationDate = Calendar.current.date(byAdding: .hour, value: 1, to: creationDate)
         
         let csvString = """
-            1,"Test, task",important,\(formatter.string(from: deadline!)),false,\(formatter.string(from: creationDate)),\(formatter.string(from: modificationDate!))
+            1,"Test, task",important,\(formatter.string(from: deadline!)),false,\(formatter.string(from: creationDate)),000000,\(formatter.string(from: modificationDate!))
             """
         
         guard let todoItem = TodoItem.parse(csv: csvString) else {
@@ -173,6 +180,7 @@ final class TodoItemTests: XCTestCase {
             creationDate.timeIntervalSinceReferenceDate,
             accuracy: 1.0
         )
+        XCTAssertEqual(todoItem.hex, "000000")
         XCTAssertEqual(
             todoItem.modificationDate!.timeIntervalSinceReferenceDate,
             modificationDate!.timeIntervalSinceReferenceDate,

@@ -5,13 +5,18 @@
 //  Created by Анастасия on 15.06.2024.
 //
 
-final class FileCache {
+import Foundation
+
+final class FileCache: ObservableObject {
     // MARK: - Fields
     private var todoList: [TodoItem]
     private let fileStorageStrategy: FileStorageStrategy
     
     // MARK: - Lifecycle
-    init(todoList: [TodoItem] = [], fileStorageStrategy: FileStorageStrategy) {
+    init(
+        todoList: [TodoItem] = [],
+        fileStorageStrategy: FileStorageStrategy = JSONFileStorageStrategy()
+    ) {
         self.todoList = todoList
         self.fileStorageStrategy = fileStorageStrategy
     }

@@ -7,12 +7,23 @@
 
 import Foundation
 
-struct TodoItem {
+struct TodoItem: Identifiable {
     // MARK: - Enum Importance
-    enum Importance: String {
+    enum Importance: String, Comparable {
         case unimportant
         case ordinary
         case important
+        
+        static func < (lhs: Importance, rhs: Importance) -> Bool {
+            switch (lhs, rhs) {
+            case (.important, .ordinary), (.important, .unimportant), (.ordinary, .unimportant):
+                return false
+            case (.ordinary, .important), (.unimportant, .important), (.unimportant, .ordinary):
+                return true
+            default:
+                return false
+            }
+        }
     }
     
     // MARK: - Fields
@@ -23,6 +34,7 @@ struct TodoItem {
     let done: Bool
     let creationDate: Date
     let modificationDate: Date?
+    let hex: String
     
     // MARK: - Lifecycle
     init(
@@ -32,7 +44,8 @@ struct TodoItem {
         deadline: Date? = nil,
         done: Bool = false,
         creationDate: Date = Date(),
-        modificationDate: Date? = nil
+        modificationDate: Date? = nil,
+        hex: String = "FFFFFF"
     ) {
         self.id = id
         self.text = text
@@ -41,5 +54,6 @@ struct TodoItem {
         self.done = done
         self.creationDate = creationDate
         self.modificationDate = modificationDate
+        self.hex = hex
     }
 }

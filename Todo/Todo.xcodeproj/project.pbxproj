@@ -7,8 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5296A3142C2EA82900312885 /* MyDoingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3132C2EA82900312885 /* MyDoingsView.swift */; };
+		5296A3162C2EABCE00312885 /* MyDoingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3152C2EABCE00312885 /* MyDoingsViewModel.swift */; };
+		5296A3192C2EF2F000312885 /* ImportancePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3182C2EF2F000312885 /* ImportancePickerView.swift */; };
+		5296A31B2C2EF30400312885 /* DeadlinePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A31A2C2EF30400312885 /* DeadlinePickerView.swift */; };
+		5296A3202C2F2FCF00312885 /* EditTodoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A31F2C2F2FCE00312885 /* EditTodoItemView.swift */; };
+		5296A3222C2F321F00312885 /* EditTodoItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3212C2F321F00312885 /* EditTodoItemViewModel.swift */; };
+		5296A3252C2F5AF200312885 /* CustomColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3242C2F5AF200312885 /* CustomColorPickerView.swift */; };
+		5296A3272C2F7C2300312885 /* UIColor+Blend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3262C2F7C2300312885 /* UIColor+Blend.swift */; };
+		5296A3292C2F7C7E00312885 /* Color+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3282C2F7C7E00312885 /* Color+HexString.swift */; };
+		5296A32B2C2F878400312885 /* TodoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A32A2C2F878400312885 /* TodoRowView.swift */; };
 		52B03E752C268085007D8DC9 /* TodoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B03E742C268085007D8DC9 /* TodoApp.swift */; };
-		52B03E772C268085007D8DC9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B03E762C268085007D8DC9 /* ContentView.swift */; };
 		52B03E792C268089007D8DC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52B03E782C268089007D8DC9 /* Assets.xcassets */; };
 		52B03E7C2C268089007D8DC9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52B03E7B2C268089007D8DC9 /* Preview Assets.xcassets */; };
 		52B03E862C26808A007D8DC9 /* TodoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B03E852C26808A007D8DC9 /* TodoTests.swift */; };
@@ -42,9 +51,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5296A3132C2EA82900312885 /* MyDoingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDoingsView.swift; sourceTree = "<group>"; };
+		5296A3152C2EABCE00312885 /* MyDoingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDoingsViewModel.swift; sourceTree = "<group>"; };
+		5296A3182C2EF2F000312885 /* ImportancePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportancePickerView.swift; sourceTree = "<group>"; };
+		5296A31A2C2EF30400312885 /* DeadlinePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlinePickerView.swift; sourceTree = "<group>"; };
+		5296A31F2C2F2FCE00312885 /* EditTodoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoItemView.swift; sourceTree = "<group>"; };
+		5296A3212C2F321F00312885 /* EditTodoItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoItemViewModel.swift; sourceTree = "<group>"; };
+		5296A3242C2F5AF200312885 /* CustomColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorPickerView.swift; sourceTree = "<group>"; };
+		5296A3262C2F7C2300312885 /* UIColor+Blend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Blend.swift"; sourceTree = "<group>"; };
+		5296A3282C2F7C7E00312885 /* Color+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HexString.swift"; sourceTree = "<group>"; };
+		5296A32A2C2F878400312885 /* TodoRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRowView.swift; sourceTree = "<group>"; };
 		52B03E712C268085007D8DC9 /* Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B03E742C268085007D8DC9 /* TodoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoApp.swift; sourceTree = "<group>"; };
-		52B03E762C268085007D8DC9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		52B03E782C268089007D8DC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52B03E7B2C268089007D8DC9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		52B03E812C26808A007D8DC9 /* TodoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +105,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5296A3112C2EA5DB00312885 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				5296A3232C2F398300312885 /* EditTodoItemScreen */,
+				5296A3122C2EA80D00312885 /* MyDoingsScreen */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		5296A3122C2EA80D00312885 /* MyDoingsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				5296A3132C2EA82900312885 /* MyDoingsView.swift */,
+				5296A3152C2EABCE00312885 /* MyDoingsViewModel.swift */,
+				5296A32A2C2F878400312885 /* TodoRowView.swift */,
+			);
+			path = MyDoingsScreen;
+			sourceTree = "<group>";
+		};
+		5296A3232C2F398300312885 /* EditTodoItemScreen */ = {
+			isa = PBXGroup;
+			children = (
+				5296A3212C2F321F00312885 /* EditTodoItemViewModel.swift */,
+				5296A31F2C2F2FCE00312885 /* EditTodoItemView.swift */,
+				5296A31A2C2EF30400312885 /* DeadlinePickerView.swift */,
+				5296A3182C2EF2F000312885 /* ImportancePickerView.swift */,
+				5296A3242C2F5AF200312885 /* CustomColorPickerView.swift */,
+			);
+			path = EditTodoItemScreen;
+			sourceTree = "<group>";
+		};
 		52B03E682C268085007D8DC9 = {
 			isa = PBXGroup;
 			children = (
@@ -110,11 +159,11 @@
 		52B03E732C268085007D8DC9 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
+				5296A3112C2EA5DB00312885 /* Screens */,
 				52B03EA02C2680FE007D8DC9 /* Services */,
 				52B03E9F2C2680F5007D8DC9 /* Extensions */,
 				52B03E9E2C2680EE007D8DC9 /* Models */,
 				52B03E742C268085007D8DC9 /* TodoApp.swift */,
-				52B03E762C268085007D8DC9 /* ContentView.swift */,
 				52B03E782C268089007D8DC9 /* Assets.xcassets */,
 				52B03E7A2C268089007D8DC9 /* Preview Content */,
 			);
@@ -160,6 +209,8 @@
 			children = (
 				52B03EA32C268157007D8DC9 /* TodoItem+ParsingJson.swift */,
 				52B03EA52C268170007D8DC9 /* TodoItem+ParsingCSV.swift */,
+				5296A3262C2F7C2300312885 /* UIColor+Blend.swift */,
+				5296A3282C2F7C7E00312885 /* Color+HexString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -305,13 +356,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5296A3142C2EA82900312885 /* MyDoingsView.swift in Sources */,
+				5296A32B2C2F878400312885 /* TodoRowView.swift in Sources */,
+				5296A3192C2EF2F000312885 /* ImportancePickerView.swift in Sources */,
+				5296A3292C2F7C7E00312885 /* Color+HexString.swift in Sources */,
 				52B03EA62C268170007D8DC9 /* TodoItem+ParsingCSV.swift in Sources */,
-				52B03E772C268085007D8DC9 /* ContentView.swift in Sources */,
 				52B03EAC2C2681D3007D8DC9 /* JsonFileStorageStrategy.swift in Sources */,
+				5296A3202C2F2FCF00312885 /* EditTodoItemView.swift in Sources */,
 				52B03EA22C268125007D8DC9 /* TodoItem.swift in Sources */,
 				52B03EAA2C2681B1007D8DC9 /* FileStorageStrategy.swift in Sources */,
+				5296A31B2C2EF30400312885 /* DeadlinePickerView.swift in Sources */,
+				5296A3222C2F321F00312885 /* EditTodoItemViewModel.swift in Sources */,
 				52B03EAE2C268203007D8DC9 /* CSVFileStorageStrategy.swift in Sources */,
+				5296A3162C2EABCE00312885 /* MyDoingsViewModel.swift in Sources */,
+				5296A3272C2F7C2300312885 /* UIColor+Blend.swift in Sources */,
 				52B03E752C268085007D8DC9 /* TodoApp.swift in Sources */,
+				5296A3252C2F5AF200312885 /* CustomColorPickerView.swift in Sources */,
 				52B03EA82C268197007D8DC9 /* FileCache.swift in Sources */,
 				52B03EA42C268157007D8DC9 /* TodoItem+ParsingJson.swift in Sources */,
 			);
@@ -486,6 +546,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -515,6 +576,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -537,7 +599,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B7GS8QJHZS;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = nvoter.TodoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -557,7 +619,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B7GS8QJHZS;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = nvoter.TodoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -576,6 +638,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B7GS8QJHZS;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = nvoter.TodoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -594,6 +657,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B7GS8QJHZS;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = nvoter.TodoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
