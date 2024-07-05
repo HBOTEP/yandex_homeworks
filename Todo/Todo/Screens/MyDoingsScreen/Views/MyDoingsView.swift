@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct MyDoingsView: View {
+    // MARK: - Fields
     @StateObject private var viewModel = MyDoingsViewModel()
     @State private var showingCreationDetail = false
     @State private var showingEditorDetail = false
     @State private var selectedTodo: TodoItem?
     @State private var showCompleted = false
     @State private var sortOption: SortOption = .byCreationDate
+    @State private var showingCalendar = false
 
     var body: some View {
         NavigationStack {
             VStack {
                 HStack {
-                    Text("Выполнено — \(viewModel.items.filter { $0.done }.count)")
+                    Text(" Выполнено — \(viewModel.items.filter { $0.done }.count)")
                         .foregroundColor(.secondary)
                     Spacer()
                     Menu {
@@ -37,15 +39,15 @@ struct MyDoingsView: View {
                                 Text("По добавлению")
                             }
                             Button(action: {
-                                sortOption = .byPriority
+                                sortOption = .byImportance
                             }) {
                                 Text("По важности")
                             }
                         }
                     } label: {
                         Image(systemName: "slider.horizontal.3")
-                            .font(.title)
                             .foregroundColor(.blue)
+                            .font(.system(size: 25))
                     }
                 }
                 .padding(.horizontal)
@@ -76,8 +78,13 @@ struct MyDoingsView: View {
                             }
                         )
                     }
+                    
+                    NewTodoRowView {
+                        showingCreationDetail = true
+                    }
+                    .listRowInsets(EdgeInsets())
                 }
-                .navigationTitle("Мои дела")
+                .listStyle(DefaultListStyle())
                 .toolbar {
                     ToolbarItem(placement: .bottomBar) {
                         Button(action: {
@@ -89,30 +96,68 @@ struct MyDoingsView: View {
                         }
                     }
                 }
-                .sheet(isPresented: $showingCreationDetail) {
-                    EditTodoItemView(viewModel: EditTodoItemViewModel(todoItem: nil, mydoingsViewModel: viewModel), isShowed: $showingCreationDetail)
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Text("Мои дела")
+                        .font(.title)
+                        .bold()
                 }
-                .sheet(isPresented: $showingEditorDetail) {
-                    if let selectedTodo = selectedTodo {
-                        EditTodoItemView(viewModel: EditTodoItemViewModel(todoItem: selectedTodo, mydoingsViewModel: viewModel), isShowed: $showingEditorDetail)
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink() {
+                        CalendarViewWrapper()
+                            .navigationTitle("Мои дела")
+                            .toolbarRole(.editor)
+                    } label: {
+                        Image(systemName: "calendar")
                     }
                 }
+            }
+        }
+        .onAppear() {
+            viewModel.loadItems()
+        }
+        .sheet(isPresented: $showingCreationDetail) {
+            EditTodoItemView(
+                viewModel: EditTodoItemViewModel(
+                    todoItem: nil,
+                    myDoingsViewModel: viewModel
+                ),
+                isShowed: $showingCreationDetail
+            )
+        }
+        .sheet(isPresented: $showingEditorDetail) {
+            if let selectedTodo = selectedTodo {
+                EditTodoItemView(
+                    viewModel: EditTodoItemViewModel(
+                        todoItem: selectedTodo,
+                        myDoingsViewModel: viewModel
+                    ),
+                    isShowed: $showingEditorDetail
+                )
             }
         }
     }
 
     private var filteredAndSortedItems: [TodoItem] {
-        let filteredItems = viewModel.items.filter { !showCompleted ? !$0.done : true }
+        let filteredItems = viewModel.items.filter {
+            !showCompleted ? !$0.done : true
+        }
         switch sortOption {
         case .byCreationDate:
-            return filteredItems.sorted { $0.creationDate < $1.creationDate }
-        case .byPriority:
-            return filteredItems.sorted { $0.importance > $1.importance }
+            return filteredItems.sorted {
+                $0.creationDate < $1.creationDate
+            }
+        case .byImportance:
+            return filteredItems.sorted {
+                $0.importance > $1.importance
+            }
         }
     }
 
+    // MARK: - Enum SortOption
     enum SortOption {
-        case byCreationDate, byPriority
+        case byCreationDate, byImportance
     }
 }
 

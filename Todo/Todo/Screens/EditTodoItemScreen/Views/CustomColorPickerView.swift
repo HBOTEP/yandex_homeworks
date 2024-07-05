@@ -9,8 +9,8 @@ import SwiftUI
 
 struct CustomColorPickerView: View {
     @State private var brightness: Double = 1.0
-    @Binding var showColorPicker: Bool
     @Binding var selectedColor: Color
+    @Binding var showColorPicker: Bool
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -87,17 +87,32 @@ struct CustomColorPickerView: View {
         var colors = [Color]()
         for i in 0..<baseColors.count - 1 {
             colors.append(Color(baseColors[i]))
-            let middleColor = UIColor.blend(color1: baseColors[i], color2: baseColors[i + 1], location: 0.5)
+            let middleColor = UIColor.blend(
+                color1: baseColors[i],
+                color2: baseColors[i + 1],
+                location: 0.5
+            )
             colors.append(Color(middleColor))
         }
-        colors.append(Color(baseColors.last!))
+        guard let color = baseColors.last else { return colors }
+        colors.append(Color(color))
         return colors
     }
 
     private func getColor(at position: CGFloat) -> Color {
         let colors = generateGradientColors()
         let width = UIScreen.main.bounds.width - 32
-        let index = max(0, min(colors.count - 1, Int(position / width * CGFloat(colors.count))))
+        let index = max(
+            0,
+            min(
+                colors.count - 1,
+                Int(
+                    position / width * CGFloat(
+                        colors.count
+                    )
+                )
+            )
+        )
         return colors[index]
     }
 }

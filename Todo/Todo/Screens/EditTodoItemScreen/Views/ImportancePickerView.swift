@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ImportancePickerView: View {
     @Binding var importance: TodoItem.Importance
+    
     var body: some View {
         HStack {
             Text("Важность")

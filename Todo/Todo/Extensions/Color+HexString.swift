@@ -32,10 +32,10 @@ extension Color {
             let red = components[0]
             let green = components[1]
             let blue = components[2]
-            return String(format: "#%02X%02X%02X", Int(red * 255), Int(green * 255), Int(blue * 255))
+            return String(format: "%02X%02X%02X", Int(red * 255), Int(green * 255), Int(blue * 255))
         case 2:
             let white = components[0]
-            return String(format: "#%02X%02X%02X", Int(white * 255), Int(white * 255), Int(white * 255))
+            return String(format: "%02X%02X%02X", Int(white * 255), Int(white * 255), Int(white * 255))
         default:
             return "FFFFFF"
         }

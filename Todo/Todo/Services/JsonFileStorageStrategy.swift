@@ -9,9 +9,7 @@ import Foundation
 
 class JSONFileStorageStrategy: FileStorageStrategy {
     func save(data: [TodoItem], to filename: String) {
-        guard let fileURL = getDocumentsDirectory()?.appendingPathComponent(
-            filename
-        ) else {
+        guard let fileURL = getDocumentsDirectory()?.appendingPathComponent(filename) else {
             print("Failed to get documents directory")
             return
         }
@@ -25,20 +23,20 @@ class JSONFileStorageStrategy: FileStorageStrategy {
             print("Failed to save JSON file: \(error)")
         }
     }
-
+    
     func load(from filename: String) -> [TodoItem] {
         guard let fileURL = getDocumentsDirectory()?.appendingPathComponent(filename) else {
             print("Failed to get documents directory")
             return []
         }
-        var items: [TodoItem] = []
+        var data: [TodoItem] = []
         
         do {
             let jsonData = try Data(contentsOf: fileURL)
             if let jsonArray = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [Any] {
                 for jsonItem in jsonArray {
                     if let item = TodoItem.parse(json: jsonItem) {
-                        items.append(item)
+                        data.append(item)
                     }
                 }
             }
@@ -46,7 +44,7 @@ class JSONFileStorageStrategy: FileStorageStrategy {
         } catch {
             print("Failed to load JSON file: \(error)")
         }
-        return items
+        return data
     }
     
     private func getDocumentsDirectory() -> URL? {

@@ -1,0 +1,87 @@
+//
+//  CalendarViewModel.swift
+//  Todo
+//
+//  Created by Анастасия on 05.07.2024.
+//
+
+import Foundation
+
+final class CalendarViewModel {
+    // MARK: - Fields
+    var todoItems: [(String, [TodoItem])] = []
+    var dates: [String] = []
+    private var items: [TodoItem] = []
+    private var fileCache: FileCache
+
+    // MARK: - Lifecycle
+    init(fileCache: FileCache = FileCache(fileStorageStrategy: JSONFileStorageStrategy())) {
+        self.fileCache = fileCache
+        loadItems()
+    }
+
+    // MARK: - Methods
+    func loadItems() {
+        fileCache.loadFromFile("todoitems.json")
+        items = fileCache.getTodoList()
+        items.forEach { item in
+            guard let deadline = item.deadline else {
+                if !todoItems.contains(where: { $0.0 == "Другое" } ) {
+                    todoItems.append(("Другое", [item]))
+                    dates.append("Другое")
+                } else {
+                    if let index = todoItems.firstIndex(where: { $0.0 == "Другое" }) {
+                        todoItems[index].1.append(item)
+                    }
+                }
+                return
+            }
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "ru_RU")
+            formatter.dateFormat = "dd MMMM yyyy"
+            let date = formatter.string(from: deadline)
+            if !todoItems.contains(where: { $0.0 == date } ) {
+                todoItems.append((date, [item]))
+                dates.append(date)
+            } else {
+                if let index = todoItems.firstIndex(where: { $0.0 == date }) {
+                    todoItems[index].1.append(item)
+                }
+            }
+        }
+        todoItems = todoItems.sorted { $0.0 < $1.0 }
+        dates = dates.sorted { $0 < $1 }
+    }
+
+    func addItem(_ item: TodoItem) {
+        fileCache.addTask(todoItem: item)
+        fileCache.saveToFile("todoitems.json")
+        loadItems()
+    }
+
+    func updateItem(_ item: TodoItem) {
+        if items.firstIndex(where: { $0.id == item.id }) != nil {
+            fileCache.deleteTask(id: item.id)
+            fileCache.addTask(todoItem: item)
+        } else {
+            fileCache.addTask(todoItem: item)
+        }
+        fileCache.saveToFile("todoitems.json")
+        loadItems()
+    }
+
+    func removeItem(by id: String) {
+        fileCache.deleteTask(id: id)
+        fileCache.saveToFile("todoitems.json")
+        loadItems()
+    }
+
+//    func removeItem(at offsets: IndexSet) {
+//        offsets.forEach { index in
+//            let item = items[index]
+//            fileCache.deleteTask(id: item.id)
+//        }
+//        fileCache.saveToFile("todoitems.json")
+//        loadItems()
+//    }
+}
