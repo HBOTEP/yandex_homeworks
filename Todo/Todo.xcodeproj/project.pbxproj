@@ -37,6 +37,8 @@
 		52FB13282C38343A00ECE4B1 /* TodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FB13272C38343A00ECE4B1 /* TodoCell.swift */; };
 		52FB132A2C3837F500ECE4B1 /* CalendarViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FB13292C3837F500ECE4B1 /* CalendarViewWrapper.swift */; };
 		52FB132C2C38795800ECE4B1 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FB132B2C38795800ECE4B1 /* CalendarCell.swift */; };
+		52FB132E2C38AF9300ECE4B1 /* CategoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FB132D2C38AF9300ECE4B1 /* CategoryPickerView.swift */; };
+		52FB13302C38B03200ECE4B1 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FB132F2C38B03200ECE4B1 /* Category.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +92,8 @@
 		52FB13272C38343A00ECE4B1 /* TodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCell.swift; sourceTree = "<group>"; };
 		52FB13292C3837F500ECE4B1 /* CalendarViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewWrapper.swift; sourceTree = "<group>"; };
 		52FB132B2C38795800ECE4B1 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		52FB132D2C38AF9300ECE4B1 /* CategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerView.swift; sourceTree = "<group>"; };
+		52FB132F2C38B03200ECE4B1 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				52B03EA12C268125007D8DC9 /* TodoItem.swift */,
+				52FB132F2C38B03200ECE4B1 /* Category.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -252,6 +257,7 @@
 				5296A31A2C2EF30400312885 /* DeadlinePickerView.swift */,
 				5296A3182C2EF2F000312885 /* ImportancePickerView.swift */,
 				5296A3242C2F5AF200312885 /* CustomColorPickerView.swift */,
+				52FB132D2C38AF9300ECE4B1 /* CategoryPickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -439,6 +445,7 @@
 				52FB13252C382C5D00ECE4B1 /* CalendarViewModel.swift in Sources */,
 				52FB132C2C38795800ECE4B1 /* CalendarCell.swift in Sources */,
 				52FB132A2C3837F500ECE4B1 /* CalendarViewWrapper.swift in Sources */,
+				52FB13302C38B03200ECE4B1 /* Category.swift in Sources */,
 				52FB13282C38343A00ECE4B1 /* TodoCell.swift in Sources */,
 				52B03EAC2C2681D3007D8DC9 /* JsonFileStorageStrategy.swift in Sources */,
 				5296A3202C2F2FCF00312885 /* EditTodoItemView.swift in Sources */,
@@ -448,6 +455,7 @@
 				5296A3222C2F321F00312885 /* EditTodoItemViewModel.swift in Sources */,
 				52B03EAE2C268203007D8DC9 /* CSVFileStorageStrategy.swift in Sources */,
 				5296A3162C2EABCE00312885 /* MyDoingsViewModel.swift in Sources */,
+				52FB132E2C38AF9300ECE4B1 /* CategoryPickerView.swift in Sources */,
 				52FB13162C35F6F400ECE4B1 /* NewTodoRowView.swift in Sources */,
 				5296A3272C2F7C2300312885 /* UIColor+Blend.swift in Sources */,
 				52B03E752C268085007D8DC9 /* TodoApp.swift in Sources */,

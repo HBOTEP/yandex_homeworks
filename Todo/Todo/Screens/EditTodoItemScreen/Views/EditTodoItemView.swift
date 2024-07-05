@@ -36,6 +36,8 @@ struct EditTodoItemView: View {
                         CustomColorPickerView(selectedColor: $viewModel.selectedColor, showColorPicker: $viewModel.isColorPickerShown)
                         Divider()
                         DeadlinePickerView(deadlineOn: $viewModel.deadlineOn, deadline: $viewModel.deadline)
+                        Divider()
+                        CategoryPickerView(category: $viewModel.category)
                     }
                     .cornerRadius(16)
                     .padding(.horizontal)

@@ -105,13 +105,31 @@ final class CalendarViewController: UIViewController {
 // MARK: - UITableViewDelegate
 extension CalendarViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        // TODO
-        return nil
+        let item = viewModel.todoItems[indexPath.section].1[indexPath.row] as TodoItem
+        let uploadedAction = UIContextualAction(style: .normal, title: "", handler: {
+            (action, sourceView, completionHandler) in
+            self.viewModel.changeDone(item)
+            completionHandler(true)
+        }
+        )
+        uploadedAction.backgroundColor = .green
+        uploadedAction.image = UIImage(systemName: "checkmark.circle.fill")
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [uploadedAction])
+        return swipeConfiguration
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        // TODO
-        return nil
+        let item = viewModel.todoItems[indexPath.section].1[indexPath.row] as TodoItem
+        let uploadedAction = UIContextualAction(style: .normal, title: "", handler: {
+            (action, sourceView, completionHandler) in
+            self.viewModel.removeItem(by: item.id)
+            completionHandler(true)
+        }
+        )
+        uploadedAction.backgroundColor = .red
+        uploadedAction.image = UIImage(systemName: "trash")
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [uploadedAction])
+        return swipeConfiguration
     }
 }
 
@@ -139,7 +157,9 @@ extension CalendarViewController: UITableViewDataSource {
 
 // MARK: - UICollectionViewDelegate
 extension CalendarViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        table.scrollToRow(at: IndexPath(item: 0, section: indexPath.item), at: .top, animated: true)
+    }
 }
 
 // MARK: - UICollectionViewDataSource

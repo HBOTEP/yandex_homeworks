@@ -16,6 +16,7 @@ final class EditTodoItemViewModel: ObservableObject {
     @Published var deadlineOn: Bool
     @Published var selectedColor: Color
     @Published var isColorPickerShown: Bool
+    @Published var category: Category
     @Published var todoItem: TodoItem?
 
     var myDoingsViewModel: MyDoingsViewModel
@@ -31,6 +32,7 @@ final class EditTodoItemViewModel: ObservableObject {
         self.deadlineOn = todoItem?.deadline != nil
         self.selectedColor = Color(hex: todoItem?.hex ?? "F0171")
         self.isColorPickerShown = false
+        self.category = todoItem?.category ?? .other
     }
 
     // MARK: - Metods
@@ -43,7 +45,8 @@ final class EditTodoItemViewModel: ObservableObject {
             done: todoItem?.done ?? false,
             creationDate: todoItem?.creationDate ?? Date(),
             modificationDate: Date(),
-            hex: selectedColor.hexString()
+            hex: selectedColor.hexString(),
+            category: category
         )
         myDoingsViewModel.updateItem(updatedItem)
     }

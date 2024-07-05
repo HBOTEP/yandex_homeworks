@@ -76,6 +76,20 @@ final class CalendarViewModel {
         loadItems()
     }
 
+    func changeDone(_ item: TodoItem) {
+        updateItem(
+            TodoItem(
+                id: item.id,
+                text: item.text,
+                importance: item.importance,
+                deadline: item.deadline,
+                done: !item.done,
+                creationDate: item.creationDate,
+                modificationDate: item.modificationDate,
+                hex: item.hex
+            )
+        )
+    }
 //    func removeItem(at offsets: IndexSet) {
 //        offsets.forEach { index in
 //            let item = items[index]

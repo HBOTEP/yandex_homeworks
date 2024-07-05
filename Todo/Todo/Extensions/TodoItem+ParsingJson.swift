@@ -18,7 +18,8 @@ extension TodoItem {
             "text": text,
             "creationDate": formatter.string(from: creationDate),
             "done": done,
-            "hex": hex
+            "hex": hex,
+            "category": category.rawValue
         ]
         
         if importance != .ordinary {
@@ -95,6 +96,11 @@ extension TodoItem {
         
         let hex = dictionary["hex"] as? String ?? "FFFFF"
         
+        let categoryString = dictionary["category"] as? String ?? Category.other.rawValue
+        guard let category = Category(rawValue: categoryString) else {
+            return nil
+        }
+        
         return TodoItem(
             id: id,
             text: text,
@@ -103,7 +109,8 @@ extension TodoItem {
             done: done,
             creationDate: creationDate,
             modificationDate: modificationDate,
-            hex: hex
+            hex: hex,
+            category: category
         )
     }
 }
