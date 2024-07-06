@@ -16,7 +16,7 @@ struct MyDoingsView: View {
     @State private var showCompleted = false
     @State private var sortOption: SortOption = .byCreationDate
     @State private var showingCalendar = false
-
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -51,7 +51,7 @@ struct MyDoingsView: View {
                     }
                 }
                 .padding(.horizontal)
-
+                
                 List {
                     ForEach(filteredAndSortedItems) { item in
                         TodoRowView(
@@ -108,6 +108,9 @@ struct MyDoingsView: View {
                         CalendarViewWrapper()
                             .navigationTitle("Мои дела")
                             .toolbarRole(.editor)
+                            .onDisappear() {
+                                viewModel.loadItems()
+                            }
                     } label: {
                         Image(systemName: "calendar")
                     }
@@ -138,7 +141,7 @@ struct MyDoingsView: View {
             }
         }
     }
-
+    
     private var filteredAndSortedItems: [TodoItem] {
         let filteredItems = viewModel.items.filter {
             !showCompleted ? !$0.done : true
@@ -154,7 +157,7 @@ struct MyDoingsView: View {
             }
         }
     }
-
+    
     // MARK: - Enum SortOption
     enum SortOption {
         case byCreationDate, byImportance

@@ -89,6 +89,7 @@ final class CalendarViewModel {
                 hex: item.hex
             )
         )
+        print(item.id)
     }
 //    func removeItem(at offsets: IndexSet) {
 //        offsets.forEach { index in

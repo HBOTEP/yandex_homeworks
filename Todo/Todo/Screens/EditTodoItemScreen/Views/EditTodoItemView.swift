@@ -85,8 +85,6 @@ struct EditTodoItemView: View {
             ),
             myDoingsViewModel: MyDoingsViewModel()
         ),
-        isShowed: .constant(
-            true
-        )
+        isShowed: .constant(true)
     )
 }

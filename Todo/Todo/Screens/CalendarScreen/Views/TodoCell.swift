@@ -13,7 +13,7 @@ final class TodoCell: UITableViewCell {
     
     lazy var text: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 3
+        label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -24,7 +24,7 @@ final class TodoCell: UITableViewCell {
         view.layer.cornerRadius = 8
         return view
     }()
-    
+        
     // MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)

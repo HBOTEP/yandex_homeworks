@@ -98,7 +98,11 @@ final class CalendarViewController: UIViewController {
     // MARK: - Actions
     @objc
     private func plusButtonTapped() {
-        
+        isShowed = true
+        let viewModel = EditTodoItemViewModel(todoItem: nil, myDoingsViewModel: MyDoingsViewModel())
+        let swiftUIView = EditTodoItemView(viewModel: viewModel, isShowed: isShowed)
+        let hostingController = UIHostingController(rootView: swiftUIView)
+        navigationController?.present(hostingController, animated: true)
     }
 }
 
@@ -106,9 +110,13 @@ final class CalendarViewController: UIViewController {
 extension CalendarViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let item = viewModel.todoItems[indexPath.section].1[indexPath.row] as TodoItem
+        if item.done { return nil }
         let uploadedAction = UIContextualAction(style: .normal, title: "", handler: {
             (action, sourceView, completionHandler) in
             self.viewModel.changeDone(item)
+            let cell = self.table.dequeueReusableCell(withIdentifier: TodoCell.todoCellId)
+            guard let todoCell = cell as? TodoCell else { return }
+            todoCell.configure(with: self.viewModel.todoItems[indexPath.section].1[indexPath.row])
             completionHandler(true)
         }
         )
@@ -120,14 +128,19 @@ extension CalendarViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let item = viewModel.todoItems[indexPath.section].1[indexPath.row] as TodoItem
+        if !item.done { return nil }
         let uploadedAction = UIContextualAction(style: .normal, title: "", handler: {
             (action, sourceView, completionHandler) in
-            self.viewModel.removeItem(by: item.id)
+            self.viewModel.changeDone(item)
+            guard let todoCell = self.table.cellForRow(at: indexPath) as? TodoCell else { return }
+//            let cell = self.table.dequeueReusableCell(withIdentifier: TodoCell.todoCellId)
+//            guard let todoCell = cell as? TodoCell else { return }
+            todoCell.configure(with: self.viewModel.todoItems[indexPath.section].1[indexPath.row])
             completionHandler(true)
         }
         )
         uploadedAction.backgroundColor = .red
-        uploadedAction.image = UIImage(systemName: "trash")
+        uploadedAction.image = UIImage(systemName: "xmark.circle.fill")
         let swipeConfiguration = UISwipeActionsConfiguration(actions: [uploadedAction])
         return swipeConfiguration
     }
@@ -160,6 +173,21 @@ extension CalendarViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         table.scrollToRow(at: IndexPath(item: 0, section: indexPath.item), at: .top, animated: true)
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == calendar { return }
+        if (scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating) {
+            if let firstVisibleRowIndex = table.indexPathsForVisibleRows?.first {
+                let indexPath = IndexPath(item: firstVisibleRowIndex.section, section: 0)
+                calendar.scrollToItem(at: indexPath, at: .left, animated: true)
+                self.calendar.selectItem(
+                    at: indexPath,
+                    animated: true,
+                    scrollPosition: UICollectionView.ScrollPosition.left
+                )
+            }
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -177,4 +205,13 @@ extension CalendarViewController: UICollectionViewDataSource {
         calendarCell.layer.cornerRadius = 5
         return calendarCell
     }
+}
+
+// MARK: - UICollectionViewFlowLayout
+extension CalendarViewController {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAt section: Int
+    ) -> UIEdgeInsets { UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10) }
 }
