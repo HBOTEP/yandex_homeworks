@@ -7,12 +7,17 @@
 
 import Foundation
 
+protocol CalendarViewModelDelegate: AnyObject {
+    func dataDidUpdate()
+}
+
 final class CalendarViewModel {
     // MARK: - Fields
     var todoItems: [(String, [TodoItem])] = []
     var dates: [String] = []
     private var items: [TodoItem] = []
     private var fileCache: FileCache
+    weak var delegate: CalendarViewModelDelegate?
 
     // MARK: - Lifecycle
     init(fileCache: FileCache = FileCache(fileStorageStrategy: JSONFileStorageStrategy())) {
@@ -22,6 +27,8 @@ final class CalendarViewModel {
 
     // MARK: - Methods
     func loadItems() {
+        todoItems.removeAll()
+        dates.removeAll()
         fileCache.loadFromFile("todoitems.json")
         items = fileCache.getTodoList()
         items.forEach { item in
@@ -51,6 +58,7 @@ final class CalendarViewModel {
         }
         todoItems = todoItems.sorted { $0.0 < $1.0 }
         dates = dates.sorted { $0 < $1 }
+        delegate?.dataDidUpdate()
     }
 
     func addItem(_ item: TodoItem) {
@@ -89,14 +97,5 @@ final class CalendarViewModel {
                 hex: item.hex
             )
         )
-        print(item.id)
     }
-//    func removeItem(at offsets: IndexSet) {
-//        offsets.forEach { index in
-//            let item = items[index]
-//            fileCache.deleteTask(id: item.id)
-//        }
-//        fileCache.saveToFile("todoitems.json")
-//        loadItems()
-//    }
 }

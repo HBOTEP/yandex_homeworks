@@ -24,19 +24,28 @@ final class TodoCell: UITableViewCell {
         view.layer.cornerRadius = 8
         return view
     }()
-        
+    
     // MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(text)
+        text.leftAnchor.constraint(equalTo: leftAnchor, constant: 18).isActive = true
+        text.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        text.attributedText = nil
+        text.text = nil
+        category.removeFromSuperview()
+    }
+    
     // MARK: - Configuration
     func configure(with model: TodoItem) {
-        addSubview(text)
         if model.done {
             let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: model.text)
             attributedString.addAttribute(
@@ -51,16 +60,13 @@ final class TodoCell: UITableViewCell {
         } else {
             text.text = model.text
         }
-        text.leftAnchor.constraint(equalTo: leftAnchor, constant: 18).isActive = true
-        text.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        if model.category != .other {
-            addSubview(category)
-            category.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18).isActive = true
-            category.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-            category.widthAnchor.constraint(equalToConstant: 16).isActive = true
-            category.heightAnchor.constraint(equalToConstant: 16).isActive = true
-            category.backgroundColor = model.category.uiColor
-            text.trailingAnchor.constraint(equalTo: category.leadingAnchor, constant: 1).isActive = true
-        }
+        
+        contentView.addSubview(category)
+        category.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30).isActive = true
+        category.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        category.widthAnchor.constraint(equalToConstant: 16).isActive = true
+        category.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        category.backgroundColor = model.category.uiColor
+        text.trailingAnchor.constraint(equalTo: category.leadingAnchor, constant: -10).isActive = true
     }
 }

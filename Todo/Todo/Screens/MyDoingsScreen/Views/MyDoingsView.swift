@@ -106,7 +106,6 @@ struct MyDoingsView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink() {
                         CalendarViewWrapper()
-                            .navigationTitle("Мои дела")
                             .toolbarRole(.editor)
                             .onDisappear() {
                                 viewModel.loadItems()

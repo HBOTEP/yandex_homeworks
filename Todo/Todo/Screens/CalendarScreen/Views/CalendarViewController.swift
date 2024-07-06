@@ -42,6 +42,7 @@ final class CalendarViewController: UIViewController {
     init(viewModel: CalendarViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        self.viewModel.delegate = self
     }
     
     @available(*, unavailable)
@@ -98,10 +99,9 @@ final class CalendarViewController: UIViewController {
     // MARK: - Actions
     @objc
     private func plusButtonTapped() {
-        isShowed = true
         let viewModel = EditTodoItemViewModel(todoItem: nil, myDoingsViewModel: MyDoingsViewModel())
-        let swiftUIView = EditTodoItemView(viewModel: viewModel, isShowed: isShowed)
-        let hostingController = UIHostingController(rootView: swiftUIView)
+        let newView = EditTodoItemView(viewModel: viewModel, isShowed: .constant(true))
+        let hostingController = UIHostingController(rootView: newView)
         navigationController?.present(hostingController, animated: true)
     }
 }
@@ -110,39 +110,34 @@ final class CalendarViewController: UIViewController {
 extension CalendarViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let item = viewModel.todoItems[indexPath.section].1[indexPath.row] as TodoItem
-        if item.done { return nil }
-        let uploadedAction = UIContextualAction(style: .normal, title: "", handler: {
-            (action, sourceView, completionHandler) in
-            self.viewModel.changeDone(item)
-            let cell = self.table.dequeueReusableCell(withIdentifier: TodoCell.todoCellId)
-            guard let todoCell = cell as? TodoCell else { return }
-            todoCell.configure(with: self.viewModel.todoItems[indexPath.section].1[indexPath.row])
-            completionHandler(true)
+        if !item.done {
+            let doneAction = UIContextualAction(style: .normal, title: "", handler: { (action, sourceView, completionHandler) in
+                self.viewModel.changeDone(item)
+                completionHandler(true)
+            })
+            doneAction.backgroundColor = .green
+            doneAction.image = UIImage(systemName: "checkmark.circle.fill")
+            let swipeConfiguration = UISwipeActionsConfiguration(actions: [doneAction])
+            return swipeConfiguration
+        } else {
+            return nil
         }
-        )
-        uploadedAction.backgroundColor = .green
-        uploadedAction.image = UIImage(systemName: "checkmark.circle.fill")
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [uploadedAction])
-        return swipeConfiguration
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let item = viewModel.todoItems[indexPath.section].1[indexPath.row] as TodoItem
-        if !item.done { return nil }
-        let uploadedAction = UIContextualAction(style: .normal, title: "", handler: {
-            (action, sourceView, completionHandler) in
-            self.viewModel.changeDone(item)
-            guard let todoCell = self.table.cellForRow(at: indexPath) as? TodoCell else { return }
-//            let cell = self.table.dequeueReusableCell(withIdentifier: TodoCell.todoCellId)
-//            guard let todoCell = cell as? TodoCell else { return }
-            todoCell.configure(with: self.viewModel.todoItems[indexPath.section].1[indexPath.row])
-            completionHandler(true)
+        if item.done {
+            let notDoneAction = UIContextualAction(style: .normal, title: "", handler: { (action, sourceView, completionHandler) in
+                self.viewModel.changeDone(item)
+                completionHandler(true)
+            })
+            notDoneAction.backgroundColor = .yellow
+            notDoneAction.image = UIImage(systemName: "xmark.circle.fill")
+            let swipeConfiguration = UISwipeActionsConfiguration(actions: [notDoneAction])
+            return swipeConfiguration
+        } else {
+            return nil
         }
-        )
-        uploadedAction.backgroundColor = .red
-        uploadedAction.image = UIImage(systemName: "xmark.circle.fill")
-        let swipeConfiguration = UISwipeActionsConfiguration(actions: [uploadedAction])
-        return swipeConfiguration
     }
 }
 
@@ -202,16 +197,17 @@ extension CalendarViewController: UICollectionViewDataSource {
         calendarCell.configure(with: viewModel.dates[indexPath.item])
         calendarCell.layer.borderColor = UIColor.secondaryLabel.cgColor
         calendarCell.layer.borderWidth = 3
-        calendarCell.layer.cornerRadius = 5
+        calendarCell.layer.cornerRadius = 16
         return calendarCell
     }
 }
 
-// MARK: - UICollectionViewFlowLayout
-extension CalendarViewController {
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        insetForSectionAt section: Int
-    ) -> UIEdgeInsets { UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10) }
+// MARK: - CalendarViewModelDelegate
+extension CalendarViewController: CalendarViewModelDelegate {
+    func dataDidUpdate() {
+        DispatchQueue.main.async {
+            self.table.reloadData()
+            self.calendar.reloadData()
+        }
+    }
 }

@@ -40,11 +40,20 @@ final class CalendarCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        day.text = nil
+        month.text = nil
+        other.text = nil
+        other.removeFromSuperview()
+    }
+    
     // MARK: - Configuration
     func configure(with model: String) {
         switch model {
         case "Другое":
             addSubview(other)
+            other.text = "Другое"
             other.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
             other.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
             self.autoresizesSubviews = true
