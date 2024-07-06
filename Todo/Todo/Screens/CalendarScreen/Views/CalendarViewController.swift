@@ -100,7 +100,8 @@ final class CalendarViewController: UIViewController {
     @objc
     private func plusButtonTapped() {
         let viewModel = EditTodoItemViewModel(todoItem: nil, myDoingsViewModel: MyDoingsViewModel())
-        let newView = EditTodoItemView(viewModel: viewModel, isShowed: .constant(true))
+        var newView = EditTodoItemView(viewModel: viewModel, isShowed: .constant(true))
+        newView.showButtons = false
         let hostingController = UIHostingController(rootView: newView)
         navigationController?.present(hostingController, animated: true)
     }

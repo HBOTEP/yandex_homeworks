@@ -11,6 +11,7 @@ struct EditTodoItemView: View {
     // MARK: - Fields
     @ObservedObject var viewModel: EditTodoItemViewModel
     @Binding var isShowed: Bool
+    var showButtons: Bool = true
     
     var body: some View {
         NavigationStack {
@@ -60,18 +61,28 @@ struct EditTodoItemView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Отменить") {
-                        isShowed = false
+                    if showButtons {
+                        Button("Отменить") {
+                            isShowed = false
+                        }
                     }
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Сохранить") {
-                        viewModel.save()
-                        isShowed = false
+                    if showButtons {
+                        Button("Сохранить") {
+                            viewModel.save()
+                            isShowed = false
+                        }
                     }
                 }
             })
+        }
+        .onDisappear() {
+            if !showButtons {
+                viewModel.save()
+                isShowed = false
+            }
         }
     }
 }
