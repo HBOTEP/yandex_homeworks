@@ -12,42 +12,45 @@ final class EditTodoItemViewModel: ObservableObject {
     @Published var text: String
     @Published var importance: TodoItem.Importance
     @Published var deadline: Date?
-    @Published var deadlineOn: Bool
     @Published var isPickerShown: Bool
+    @Published var deadlineOn: Bool
     @Published var selectedColor: Color
     @Published var isColorPickerShown: Bool
+    @Published var category: Category
     @Published var todoItem: TodoItem?
-    
+
     var myDoingsViewModel: MyDoingsViewModel
-    
+
     // MARK: - Lifecycle
-    init(todoItem: TodoItem?, mydoingsViewModel: MyDoingsViewModel) {
+    init(todoItem: TodoItem?, myDoingsViewModel: MyDoingsViewModel) {
         self.todoItem = todoItem
-        self.myDoingsViewModel = mydoingsViewModel
+        self.myDoingsViewModel = myDoingsViewModel
         self.text = todoItem?.text ?? ""
         self.importance = todoItem?.importance ?? .ordinary
         self.deadline = todoItem?.deadline ?? nil
         self.isPickerShown = false
-        self.deadlineOn = todoItem?.deadline == nil ? false : true
-        self.selectedColor = Color(hex: todoItem?.hex ?? "FFFFFF")
+        self.deadlineOn = todoItem?.deadline != nil
+        self.selectedColor = Color(hex: todoItem?.hex ?? "F0171")
         self.isColorPickerShown = false
+        self.category = todoItem?.category ?? .other
     }
-    
-    // MARK: - Methods
-    func edit() {
-        let modifiedTodoItem = TodoItem(
+
+    // MARK: - Metods
+    func save() {
+        let updatedItem = TodoItem(
             id: todoItem?.id ?? UUID().uuidString,
             text: text,
             importance: importance,
-            deadline: isPickerShown ? deadline : nil,
+            deadline: deadlineOn ? deadline : nil,
             done: todoItem?.done ?? false,
             creationDate: todoItem?.creationDate ?? Date(),
             modificationDate: Date(),
-            hex: selectedColor.hexString()
+            hex: selectedColor.hexString(),
+            category: category
         )
-        myDoingsViewModel.updateItem(modifiedTodoItem)
+        myDoingsViewModel.updateItem(updatedItem)
     }
-    
+
     func delete() {
         guard let id = todoItem?.id else { return }
         myDoingsViewModel.removeItem(by: id)

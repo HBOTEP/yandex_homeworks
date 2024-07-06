@@ -8,35 +8,42 @@
 import SwiftUI
 
 struct EditTodoItemView: View {
+    // MARK: - Fields
     @ObservedObject var viewModel: EditTodoItemViewModel
     @Binding var isShowed: Bool
+    var showButtons: Bool = true
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 16) {
-                    TextEditor(text: $viewModel.text)
-                        .cornerRadius(16)
-                        .frame(minHeight: 120)
-                        .backgroundStyle(.blue)
-                        .contentMargins(.all, 16)
-                        .padding(.horizontal)
-                    
+                    ZStack(alignment: .trailing) {
+                        TextEditor(text: $viewModel.text)
+                            .cornerRadius(16)
+                            .frame(minHeight: 120)
+                            .backgroundStyle(.blue)
+                            .contentMargins(.all, 16)
+                            .padding(.horizontal)
+                        
+                        Rectangle()
+                            .fill(viewModel.selectedColor)
+                            .frame(width: 5)
+                            .padding(.horizontal)
+                    }
+
                     VStack(spacing: 0) {
                         ImportancePickerView(importance: $viewModel.importance)
                         Divider()
-                        CustomColorPickerView(
-                            showColorPicker: $viewModel.isColorPickerShown, selectedColor: $viewModel.selectedColor
-                        )
+                        CustomColorPickerView(selectedColor: $viewModel.selectedColor, showColorPicker: $viewModel.isColorPickerShown)
                         Divider()
                         DeadlinePickerView(deadlineOn: $viewModel.deadlineOn, deadline: $viewModel.deadline)
+                        Divider()
+                        CategoryPickerView(category: $viewModel.category)
                     }
-                    .background()
                     .cornerRadius(16)
                     .padding(.horizontal)
                     
-                    Button(role: .destructive,
-                           action: {
+                    Button(role: .destructive, action: {
                         viewModel.delete()
                         isShowed = false
                     }) {
@@ -44,7 +51,6 @@ struct EditTodoItemView: View {
                             .frame(maxWidth: .infinity)
                     }
                     .frame(height: 56)
-                    .background()
                     .cornerRadius(16)
                     .padding(.horizontal)
                     .disabled(viewModel.todoItem?.id == nil)
@@ -55,18 +61,28 @@ struct EditTodoItemView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Отменить") {
-                        isShowed = false
+                    if showButtons {
+                        Button("Отменить") {
+                            isShowed = false
+                        }
                     }
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Сохранить") {
-                        viewModel.edit()
-                        isShowed = false
+                    if showButtons {
+                        Button("Сохранить") {
+                            viewModel.save()
+                            isShowed = false
+                        }
                     }
                 }
             })
+        }
+        .onDisappear() {
+            if !showButtons {
+                viewModel.save()
+                isShowed = false
+            }
         }
     }
 }
@@ -78,10 +94,8 @@ struct EditTodoItemView: View {
                 text: "Сделать что-нибудь",
                 importance: .important
             ),
-            mydoingsViewModel: MyDoingsViewModel()
+            myDoingsViewModel: MyDoingsViewModel()
         ),
-        isShowed: .constant(
-            true
-        )
+        isShowed: .constant(true)
     )
 }

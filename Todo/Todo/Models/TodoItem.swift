@@ -35,6 +35,7 @@ struct TodoItem: Identifiable {
     let creationDate: Date
     let modificationDate: Date?
     let hex: String
+    let category: Category
     
     // MARK: - Lifecycle
     init(
@@ -45,7 +46,8 @@ struct TodoItem: Identifiable {
         done: Bool = false,
         creationDate: Date = Date(),
         modificationDate: Date? = nil,
-        hex: String = "FFFFFF"
+        hex: String = "FFFFFF",
+        category: Category = .other
     ) {
         self.id = id
         self.text = text
@@ -55,5 +57,6 @@ struct TodoItem: Identifiable {
         self.creationDate = creationDate
         self.modificationDate = modificationDate
         self.hex = hex
+        self.category = category
     }
 }
