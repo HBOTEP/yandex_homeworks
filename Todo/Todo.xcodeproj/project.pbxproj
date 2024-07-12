@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1608006E57ABFF13F7A7E707 /* Pods_Todo_TodoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 582910CB609E5BE0A7EACB3D /* Pods_Todo_TodoUITests.framework */; };
 		5239ED852C41CBEB001D236D /* CustomColorPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 5239ED842C41CBEB001D236D /* CustomColorPicker */; };
+		5239ED872C41E81E001D236D /* URLSession+AsyncDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5239ED862C41E81D001D236D /* URLSession+AsyncDataTask.swift */; };
 		5296A3142C2EA82900312885 /* MyDoingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3132C2EA82900312885 /* MyDoingsView.swift */; };
 		5296A3162C2EABCE00312885 /* MyDoingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3152C2EABCE00312885 /* MyDoingsViewModel.swift */; };
 		5296A3192C2EF2F000312885 /* ImportancePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3182C2EF2F000312885 /* ImportancePickerView.swift */; };
@@ -65,6 +66,7 @@
 		1D95342A1C9A738FF80A5A08 /* Pods-TodoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoTests.debug.xcconfig"; path = "Target Support Files/Pods-TodoTests/Pods-TodoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1E2F528F709D1FC875011E59 /* Pods-Todo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo.debug.xcconfig"; path = "Target Support Files/Pods-Todo/Pods-Todo.debug.xcconfig"; sourceTree = "<group>"; };
 		1F74BA2E734AF91672644DC0 /* Pods-Todo-TodoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo-TodoUITests.release.xcconfig"; path = "Target Support Files/Pods-Todo-TodoUITests/Pods-Todo-TodoUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5239ED862C41E81D001D236D /* URLSession+AsyncDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+AsyncDataTask.swift"; sourceTree = "<group>"; };
 		5296A3132C2EA82900312885 /* MyDoingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDoingsView.swift; sourceTree = "<group>"; };
 		5296A3152C2EABCE00312885 /* MyDoingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDoingsViewModel.swift; sourceTree = "<group>"; };
 		5296A3182C2EF2F000312885 /* ImportancePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportancePickerView.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 			children = (
 				52B03EA32C268157007D8DC9 /* TodoItem+ParsingJson.swift */,
 				52B03EA52C268170007D8DC9 /* TodoItem+ParsingCSV.swift */,
+				5239ED862C41E81D001D236D /* URLSession+AsyncDataTask.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -589,6 +592,7 @@
 				5296A3202C2F2FCF00312885 /* EditTodoItemView.swift in Sources */,
 				52B03EA22C268125007D8DC9 /* TodoItem.swift in Sources */,
 				52B03EAA2C2681B1007D8DC9 /* FileStorageStrategy.swift in Sources */,
+				5239ED872C41E81E001D236D /* URLSession+AsyncDataTask.swift in Sources */,
 				5296A31B2C2EF30400312885 /* DeadlinePickerView.swift in Sources */,
 				5296A3222C2F321F00312885 /* EditTodoItemViewModel.swift in Sources */,
 				52B03EAE2C268203007D8DC9 /* CSVFileStorageStrategy.swift in Sources */,
@@ -687,7 +691,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -744,7 +748,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -780,6 +784,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nvoter.Todo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -811,6 +816,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nvoter.Todo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
