@@ -8,15 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		1608006E57ABFF13F7A7E707 /* Pods_Todo_TodoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 582910CB609E5BE0A7EACB3D /* Pods_Todo_TodoUITests.framework */; };
+		5239ED852C41CBEB001D236D /* CustomColorPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 5239ED842C41CBEB001D236D /* CustomColorPicker */; };
 		5296A3142C2EA82900312885 /* MyDoingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3132C2EA82900312885 /* MyDoingsView.swift */; };
 		5296A3162C2EABCE00312885 /* MyDoingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3152C2EABCE00312885 /* MyDoingsViewModel.swift */; };
 		5296A3192C2EF2F000312885 /* ImportancePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3182C2EF2F000312885 /* ImportancePickerView.swift */; };
 		5296A31B2C2EF30400312885 /* DeadlinePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A31A2C2EF30400312885 /* DeadlinePickerView.swift */; };
 		5296A3202C2F2FCF00312885 /* EditTodoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A31F2C2F2FCE00312885 /* EditTodoItemView.swift */; };
 		5296A3222C2F321F00312885 /* EditTodoItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3212C2F321F00312885 /* EditTodoItemViewModel.swift */; };
-		5296A3252C2F5AF200312885 /* CustomColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3242C2F5AF200312885 /* CustomColorPickerView.swift */; };
-		5296A3272C2F7C2300312885 /* UIColor+Blend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3262C2F7C2300312885 /* UIColor+Blend.swift */; };
-		5296A3292C2F7C7E00312885 /* Color+HexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3282C2F7C7E00312885 /* Color+HexString.swift */; };
 		5296A32B2C2F878400312885 /* TodoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A32A2C2F878400312885 /* TodoRowView.swift */; };
 		52B03E752C268085007D8DC9 /* TodoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B03E742C268085007D8DC9 /* TodoApp.swift */; };
 		52B03E792C268089007D8DC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52B03E782C268089007D8DC9 /* Assets.xcassets */; };
@@ -73,9 +71,6 @@
 		5296A31A2C2EF30400312885 /* DeadlinePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlinePickerView.swift; sourceTree = "<group>"; };
 		5296A31F2C2F2FCE00312885 /* EditTodoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoItemView.swift; sourceTree = "<group>"; };
 		5296A3212C2F321F00312885 /* EditTodoItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoItemViewModel.swift; sourceTree = "<group>"; };
-		5296A3242C2F5AF200312885 /* CustomColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorPickerView.swift; sourceTree = "<group>"; };
-		5296A3262C2F7C2300312885 /* UIColor+Blend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Blend.swift"; sourceTree = "<group>"; };
-		5296A3282C2F7C7E00312885 /* Color+HexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+HexString.swift"; sourceTree = "<group>"; };
 		5296A32A2C2F878400312885 /* TodoRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRowView.swift; sourceTree = "<group>"; };
 		52B03E712C268085007D8DC9 /* Todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B03E742C268085007D8DC9 /* TodoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoApp.swift; sourceTree = "<group>"; };
@@ -116,6 +111,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52F8D3262C3ED6BD001BC6D3 /* CocoaLumberjackSwift in Frameworks */,
+				5239ED852C41CBEB001D236D /* CustomColorPicker in Frameworks */,
 				52F8D3242C3ED6BD001BC6D3 /* CocoaLumberjack in Frameworks */,
 				F5A34D3D91AC194BE1DB4149 /* Pods_Todo.framework in Frameworks */,
 			);
@@ -257,8 +253,6 @@
 			children = (
 				52B03EA32C268157007D8DC9 /* TodoItem+ParsingJson.swift */,
 				52B03EA52C268170007D8DC9 /* TodoItem+ParsingCSV.swift */,
-				5296A3262C2F7C2300312885 /* UIColor+Blend.swift */,
-				5296A3282C2F7C7E00312885 /* Color+HexString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -290,7 +284,6 @@
 				5296A31F2C2F2FCE00312885 /* EditTodoItemView.swift */,
 				5296A31A2C2EF30400312885 /* DeadlinePickerView.swift */,
 				5296A3182C2EF2F000312885 /* ImportancePickerView.swift */,
-				5296A3242C2F5AF200312885 /* CustomColorPickerView.swift */,
 				52FB132D2C38AF9300ECE4B1 /* CategoryPickerView.swift */,
 			);
 			path = Views;
@@ -371,6 +364,7 @@
 			packageProductDependencies = (
 				52F8D3232C3ED6BD001BC6D3 /* CocoaLumberjack */,
 				52F8D3252C3ED6BD001BC6D3 /* CocoaLumberjackSwift */,
+				5239ED842C41CBEB001D236D /* CustomColorPicker */,
 			);
 			productName = Todo;
 			productReference = 52B03E712C268085007D8DC9 /* Todo.app */;
@@ -448,6 +442,7 @@
 			mainGroup = 52B03E682C268085007D8DC9;
 			packageReferences = (
 				52F8D3222C3ED6BD001BC6D3 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
+				5239ED832C41CBEB001D236D /* XCRemoteSwiftPackageReference "custom_color_picker" */,
 			);
 			productRefGroup = 52B03E722C268085007D8DC9 /* Products */;
 			projectDirPath = "";
@@ -584,7 +579,6 @@
 				5296A3142C2EA82900312885 /* MyDoingsView.swift in Sources */,
 				5296A32B2C2F878400312885 /* TodoRowView.swift in Sources */,
 				5296A3192C2EF2F000312885 /* ImportancePickerView.swift in Sources */,
-				5296A3292C2F7C7E00312885 /* Color+HexString.swift in Sources */,
 				52B03EA62C268170007D8DC9 /* TodoItem+ParsingCSV.swift in Sources */,
 				52FB13252C382C5D00ECE4B1 /* CalendarViewModel.swift in Sources */,
 				52FB132C2C38795800ECE4B1 /* CalendarCell.swift in Sources */,
@@ -601,9 +595,7 @@
 				5296A3162C2EABCE00312885 /* MyDoingsViewModel.swift in Sources */,
 				52FB132E2C38AF9300ECE4B1 /* CategoryPickerView.swift in Sources */,
 				52FB13162C35F6F400ECE4B1 /* NewTodoRowView.swift in Sources */,
-				5296A3272C2F7C2300312885 /* UIColor+Blend.swift in Sources */,
 				52B03E752C268085007D8DC9 /* TodoApp.swift in Sources */,
-				5296A3252C2F5AF200312885 /* CustomColorPickerView.swift in Sources */,
 				52B03EA82C268197007D8DC9 /* FileCache.swift in Sources */,
 				52B03EA42C268157007D8DC9 /* TodoItem+ParsingJson.swift in Sources */,
 			);
@@ -948,6 +940,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5239ED832C41CBEB001D236D /* XCRemoteSwiftPackageReference "custom_color_picker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/HBOTEP/custom_color_picker";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		52F8D3222C3ED6BD001BC6D3 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CocoaLumberjack/CocoaLumberjack.git";
@@ -959,6 +959,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5239ED842C41CBEB001D236D /* CustomColorPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5239ED832C41CBEB001D236D /* XCRemoteSwiftPackageReference "custom_color_picker" */;
+			productName = CustomColorPicker;
+		};
 		52F8D3232C3ED6BD001BC6D3 /* CocoaLumberjack */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 52F8D3222C3ED6BD001BC6D3 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
