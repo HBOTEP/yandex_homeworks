@@ -28,21 +28,21 @@ struct MyDoingsView: View {
                         Section(header: Text("Скрыть/показать выполненные")) {
                             Button(action: {
                                 showCompleted.toggle()
-                            }) {
+                            }, label: {
                                 Text(showCompleted ? "Скрыть" : "Показать")
-                            }
+                            })
                         }
                         Section(header: Text("Сортировка")) {
                             Button(action: {
                                 sortOption = .byCreationDate
-                            }) {
+                            }, label: {
                                 Text("По добавлению")
-                            }
+                            })
                             Button(action: {
                                 sortOption = .byImportance
-                            }) {
+                            }, label: {
                                 Text("По важности")
-                            }
+                            })
                         }
                     } label: {
                         Image(systemName: "slider.horizontal.3")
@@ -89,11 +89,11 @@ struct MyDoingsView: View {
                     ToolbarItem(placement: .bottomBar) {
                         Button(action: {
                             showingCreationDetail = true
-                        }) {
+                        }, label: {
                             Image(systemName: "plus.circle.fill")
                                 .font(.system(size: 40))
                                 .foregroundColor(.blue)
-                        }
+                        })
                     }
                 }
             }
@@ -104,10 +104,10 @@ struct MyDoingsView: View {
                         .bold()
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink() {
+                    NavigationLink {
                         CalendarViewWrapper()
                             .toolbarRole(.editor)
-                            .onDisappear() {
+                            .onDisappear {
                                 viewModel.loadItems()
                             }
                     } label: {
@@ -116,7 +116,7 @@ struct MyDoingsView: View {
                 }
             }
         }
-        .onAppear() {
+        .onAppear {
             viewModel.loadItems()
         }
         .sheet(isPresented: $showingCreationDetail) {

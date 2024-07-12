@@ -27,13 +27,13 @@ final class FileCache: ObservableObject {
     }
     
     public func addTask(todoItem: TodoItem) {
-        if (!todoList.contains(where: { $0.id == todoItem.id } )) {
+        if !todoList.contains(where: { $0.id == todoItem.id }) {
             todoList.append(todoItem)
         }
     }
     
     public func deleteTask(id: String) {
-        todoList.removeAll(where: { $0.id == id } )
+        todoList.removeAll { $0.id == id }
     }
     
     public func saveToFile(_ filename: String) {

@@ -44,7 +44,6 @@ struct TodoRowView: View {
                         }
                         .padding(.trailing, 8)
                 }
-                
             }
             
             if todo.importance == .important {

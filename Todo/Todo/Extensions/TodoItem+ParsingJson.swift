@@ -38,10 +38,10 @@ extension TodoItem {
             withJSONObject: dictionary,
             options: []
         ),
-              let jsonResult = try? JSONSerialization.jsonObject(
+            let jsonResult = try? JSONSerialization.jsonObject(
                 with: jsonData,
                 options: []
-              ) else {
+            ) else {
             return [:]
         }
         
@@ -57,16 +57,16 @@ extension TodoItem {
             withJSONObject: json,
             options: []
         ),
-              let dictionary = try? JSONSerialization.jsonObject(
+            let dictionary = try? JSONSerialization.jsonObject(
                 with: jsonData,
                 options: []
-              ) as? [String: Any],
-              let id = dictionary["id"] as? String,
-              let text = dictionary["text"] as? String,
-              let creationDateString = dictionary["creationDate"] as? String,
-              let creationDate = formatter.date(
+            ) as? [String: Any],
+            let id = dictionary["id"] as? String,
+            let text = dictionary["text"] as? String,
+            let creationDateString = dictionary["creationDate"] as? String,
+            let creationDate = formatter.date(
                 from: creationDateString
-              ) else {
+            ) else {
             return nil
         }
         

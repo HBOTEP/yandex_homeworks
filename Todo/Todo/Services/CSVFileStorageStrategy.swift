@@ -54,4 +54,3 @@ class CSVFileStorageStrategy: FileStorageStrategy {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
     }
 }
-

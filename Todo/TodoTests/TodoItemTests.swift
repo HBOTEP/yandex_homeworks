@@ -7,8 +7,7 @@
 
 import XCTest
 
-@testable
-import Todo
+@testable import Todo
 
 final class TodoItemTests: XCTestCase {
     // MARK: - Done ordinary item with modification date
@@ -157,9 +156,16 @@ final class TodoItemTests: XCTestCase {
         let deadline = Calendar.current.date(byAdding: .day, value: 1, to: creationDate)
         let modificationDate = Calendar.current.date(byAdding: .hour, value: 1, to: creationDate)
         
+        guard let modificationDate, let deadline else { return }
         let csvString = """
-            1,"Test, task",important,\(formatter.string(from: deadline!)),false,\(formatter.string(from: creationDate)),000000,\(formatter.string(from: modificationDate!))
-            """
+            1,"Test, task",important,\(formatter.string(
+            from: deadline
+            )),false,\(formatter.string(
+            from: creationDate
+            )),000000,\(formatter.string(
+            from: modificationDate
+            ))
+        """
         
         guard let todoItem = TodoItem.parse(csv: csvString) else {
             XCTFail("Failed to parse TodoItem from CSV string")
@@ -169,9 +175,10 @@ final class TodoItemTests: XCTestCase {
         XCTAssertEqual(todoItem.id, "1")
         XCTAssertEqual(todoItem.text, "Test, task")
         XCTAssertEqual(todoItem.importance, .important)
+        guard let todoItemDeadline = todoItem.deadline else { return }
         XCTAssertEqual(
-            todoItem.deadline!.timeIntervalSinceReferenceDate,
-            deadline!.timeIntervalSinceReferenceDate,
+            todoItemDeadline.timeIntervalSinceReferenceDate,
+            deadline.timeIntervalSinceReferenceDate,
             accuracy: 1.0
         )
         XCTAssertEqual(todoItem.done, false)
@@ -181,9 +188,10 @@ final class TodoItemTests: XCTestCase {
             accuracy: 1.0
         )
         XCTAssertEqual(todoItem.hex, "000000")
+        guard let todoItemModificationDate = todoItem.modificationDate else { return }
         XCTAssertEqual(
-            todoItem.modificationDate!.timeIntervalSinceReferenceDate,
-            modificationDate!.timeIntervalSinceReferenceDate,
+            todoItemModificationDate.timeIntervalSinceReferenceDate,
+            modificationDate.timeIntervalSinceReferenceDate,
             accuracy: 1.0
         )
     }
