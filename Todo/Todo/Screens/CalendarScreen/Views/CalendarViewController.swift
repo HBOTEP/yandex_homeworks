@@ -202,7 +202,7 @@ extension CalendarViewController: UICollectionViewDataSource {
 
 // MARK: - CalendarViewModelDelegate
 extension CalendarViewController: CalendarViewModelDelegate {
-    func dataDidUpdate() {
+    nonisolated func dataDidUpdate() {
         DispatchQueue.main.async {
             self.table.reloadData()
             self.calendar.reloadData()
