@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CocoaLumberjackSwift
 
 extension TodoItem {
     // MARK: - Fields
@@ -67,9 +68,13 @@ extension TodoItem {
             let components = matches.map { match -> String in
                 guard let range = Range(match.range, in: csv) else { return "" }
                 return String(csv[range])
-            }.map(unescape)
+            }
+                .map(unescape)
             
-            guard components.count >= 7 else { return nil }
+            guard components.count >= 7 else {
+                DDLogError("Not enough arguments to parse CSV data")
+                return nil
+            }
             
             let id = components[0]
             let text = components[1]
@@ -83,6 +88,7 @@ extension TodoItem {
             
             let creationDateString = components[5]
             guard let creationDate = formatter.date(from: creationDateString) else {
+                DDLogError("Error occurred while parsing creation date")
                 return nil
             }
             
@@ -91,10 +97,18 @@ extension TodoItem {
             let modificationDateString = components.count > 7 ? components[7] : ""
             let modificationDate = modificationDateString.isEmpty ? nil : formatter.date(from: modificationDateString)
             
-            return TodoItem(id: id, text: text, importance: importance, deadline: deadline, done: done, creationDate: creationDate, modificationDate: modificationDate, hex: hex)
-            
+            return TodoItem(
+                id: id,
+                text: text,
+                importance: importance,
+                deadline: deadline,
+                done: done,
+                creationDate: creationDate,
+                modificationDate: modificationDate,
+                hex: hex
+            )
         } catch {
-            print(error)
+            DDLogError("Error occurred while parsing CSV data\n\(error)")
             return nil
         }
     }

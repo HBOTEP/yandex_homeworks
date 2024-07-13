@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CustomColorPicker
 
 struct EditTodoItemView: View {
     // MARK: - Fields
@@ -34,7 +35,10 @@ struct EditTodoItemView: View {
                     VStack(spacing: 0) {
                         ImportancePickerView(importance: $viewModel.importance)
                         Divider()
-                        CustomColorPickerView(selectedColor: $viewModel.selectedColor, showColorPicker: $viewModel.isColorPickerShown)
+                        CustomColorPickerView(
+                            selectedColor: $viewModel.selectedColor,
+                            showColorPicker: $viewModel.isColorPickerShown
+                        )
                         Divider()
                         DeadlinePickerView(deadlineOn: $viewModel.deadlineOn, deadline: $viewModel.deadline)
                         Divider()
@@ -46,10 +50,10 @@ struct EditTodoItemView: View {
                     Button(role: .destructive, action: {
                         viewModel.delete()
                         isShowed = false
-                    }) {
+                    }, label: {
                         Text("Удалить")
                             .frame(maxWidth: .infinity)
-                    }
+                    })
                     .frame(height: 56)
                     .cornerRadius(16)
                     .padding(.horizontal)
@@ -59,7 +63,7 @@ struct EditTodoItemView: View {
             .background(Color.background)
             .navigationTitle("Дело")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar(content: {
+            .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     if showButtons {
                         Button("Отменить") {
@@ -76,9 +80,9 @@ struct EditTodoItemView: View {
                         }
                     }
                 }
-            })
+            }
         }
-        .onDisappear() {
+        .onDisappear {
             if !showButtons {
                 viewModel.save()
                 isShowed = false

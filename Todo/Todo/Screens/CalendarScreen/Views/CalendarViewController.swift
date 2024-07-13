@@ -12,7 +12,7 @@ final class CalendarViewController: UIViewController {
     // MARK: - Fields
     private var viewModel: CalendarViewModel
     
-    private let plusButton: UIButton = UIButton()
+    private let plusButton = UIButton()
     
     private lazy var calendar: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -97,8 +97,7 @@ final class CalendarViewController: UIViewController {
     }
     
     // MARK: - Actions
-    @objc
-    private func plusButtonTapped() {
+    @objc private func plusButtonTapped() {
         let viewModel = EditTodoItemViewModel(todoItem: nil, myDoingsViewModel: MyDoingsViewModel())
         var newView = EditTodoItemView(viewModel: viewModel, isShowed: .constant(true))
         newView.showButtons = false
@@ -109,13 +108,14 @@ final class CalendarViewController: UIViewController {
 
 // MARK: - UITableViewDelegate
 extension CalendarViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView( _ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let item = viewModel.todoItems[indexPath.section].1[indexPath.row] as TodoItem
         if !item.done {
-            let doneAction = UIContextualAction(style: .normal, title: "", handler: { (action, sourceView, completionHandler) in
+            let doneAction = UIContextualAction(style: .normal, title: "") {_, _, completionHandler in
                 self.viewModel.changeDone(item)
                 completionHandler(true)
-            })
+            }
+
             doneAction.backgroundColor = .green
             doneAction.image = UIImage(systemName: "checkmark.circle.fill")
             let swipeConfiguration = UISwipeActionsConfiguration(actions: [doneAction])
@@ -124,21 +124,18 @@ extension CalendarViewController: UITableViewDelegate {
             return nil
         }
     }
-    
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+    func tableView( _ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let item = viewModel.todoItems[indexPath.section].1[indexPath.row] as TodoItem
-        if item.done {
-            let notDoneAction = UIContextualAction(style: .normal, title: "", handler: { (action, sourceView, completionHandler) in
-                self.viewModel.changeDone(item)
-                completionHandler(true)
-            })
-            notDoneAction.backgroundColor = .yellow
-            notDoneAction.image = UIImage(systemName: "xmark.circle.fill")
-            let swipeConfiguration = UISwipeActionsConfiguration(actions: [notDoneAction])
-            return swipeConfiguration
-        } else {
-            return nil
+
+        let notDoneAction = UIContextualAction(style: .normal, title: "") { _, _, completionHandler in
+            self.viewModel.changeDone(item)
+            completionHandler(true)
         }
+        notDoneAction.backgroundColor = .red
+        notDoneAction.image = UIImage(systemName: "xmark.circle.fill")
+        let swipeConfiguration = UISwipeActionsConfiguration(actions: [notDoneAction])
+        return swipeConfiguration
     }
 }
 
@@ -172,7 +169,7 @@ extension CalendarViewController: UICollectionViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == calendar { return }
-        if (scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating) {
+        if scrollView.isTracking || scrollView.isDragging || scrollView.isDecelerating {
             if let firstVisibleRowIndex = table.indexPathsForVisibleRows?.first {
                 let indexPath = IndexPath(item: firstVisibleRowIndex.section, section: 0)
                 calendar.scrollToItem(at: indexPath, at: .left, animated: true)
@@ -205,7 +202,7 @@ extension CalendarViewController: UICollectionViewDataSource {
 
 // MARK: - CalendarViewModelDelegate
 extension CalendarViewController: CalendarViewModelDelegate {
-    func dataDidUpdate() {
+    nonisolated func dataDidUpdate() {
         DispatchQueue.main.async {
             self.table.reloadData()
             self.calendar.reloadData()

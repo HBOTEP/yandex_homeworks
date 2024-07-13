@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CocoaLumberjackSwift
 
 extension TodoItem {
     // MARK: - Fields
@@ -38,10 +39,11 @@ extension TodoItem {
             withJSONObject: dictionary,
             options: []
         ),
-              let jsonResult = try? JSONSerialization.jsonObject(
+            let jsonResult = try? JSONSerialization.jsonObject(
                 with: jsonData,
                 options: []
-              ) else {
+            ) else {
+            DDLogError("Error occurred while serializing data to JSON")
             return [:]
         }
         
@@ -57,16 +59,17 @@ extension TodoItem {
             withJSONObject: json,
             options: []
         ),
-              let dictionary = try? JSONSerialization.jsonObject(
+            let dictionary = try? JSONSerialization.jsonObject(
                 with: jsonData,
                 options: []
-              ) as? [String: Any],
-              let id = dictionary["id"] as? String,
-              let text = dictionary["text"] as? String,
-              let creationDateString = dictionary["creationDate"] as? String,
-              let creationDate = formatter.date(
+            ) as? [String: Any],
+            let id = dictionary["id"] as? String,
+            let text = dictionary["text"] as? String,
+            let creationDateString = dictionary["creationDate"] as? String,
+            let creationDate = formatter.date(
                 from: creationDateString
-              ) else {
+            ) else {
+            DDLogError("Error occurred while parsing data from JSON")
             return nil
         }
         

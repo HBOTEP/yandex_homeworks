@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CocoaLumberjackSwift
 
 final class FileCache: ObservableObject {
     // MARK: - Fields
@@ -27,13 +28,16 @@ final class FileCache: ObservableObject {
     }
     
     public func addTask(todoItem: TodoItem) {
-        if (!todoList.contains(where: { $0.id == todoItem.id } )) {
+        if !todoList.contains(where: { $0.id == todoItem.id }) {
             todoList.append(todoItem)
+        } else {
+            DDLogWarn("Task with id \(todoItem.id) already exists")
         }
     }
     
     public func deleteTask(id: String) {
-        todoList.removeAll(where: { $0.id == id } )
+        todoList.removeAll { $0.id == id }
+        DDLogInfo("Task with id \(id) deleted")
     }
     
     public func saveToFile(_ filename: String) {

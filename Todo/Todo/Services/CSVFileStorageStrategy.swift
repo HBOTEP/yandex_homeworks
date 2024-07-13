@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import CocoaLumberjackSwift
 
 class CSVFileStorageStrategy: FileStorageStrategy {
     func save(data: [TodoItem], to filename: String) {
         guard let fileURL = getDocumentsDirectory()?.appendingPathComponent(filename) else {
-            print("Failed to get documents directory")
+            DDLogError("Documents directory not found")
             return
         }
         var csvArray: [String] = ["id,text,priority,deadline,isCompleted,creationDate,modificationDate"]
@@ -19,15 +20,15 @@ class CSVFileStorageStrategy: FileStorageStrategy {
         
         do {
             try csvString.write(to: fileURL, atomically: true, encoding: .utf8)
-            print("CSV file saved to: \(fileURL.path)")
+            DDLogInfo("CSV data saved to file \(filename)")
         } catch {
-            print("Failed to save CSV file: \(error)")
+            DDLogError("Error occurred while saving CSV data to file \(filename)\n\(error)")
         }
     }
     
     func load(from filename: String) -> [TodoItem] {
         guard let fileURL = getDocumentsDirectory()?.appendingPathComponent(filename) else {
-            print("Failed to get documents directory")
+            DDLogError("Documents directory not found")
             return []
         }
         var data: [TodoItem] = []
@@ -43,9 +44,9 @@ class CSVFileStorageStrategy: FileStorageStrategy {
                     data.append(item)
                 }
             }
-            print("CSV file loaded from: \(fileURL.path)")
+            DDLogInfo("CSV data loaded from file \(filename)")
         } catch {
-            print("Failed to load CSV file: \(error)")
+            DDLogError("Error occurred while loading CSV data from file \(filename)\n\(error)")
         }
         return data
     }
@@ -54,4 +55,3 @@ class CSVFileStorageStrategy: FileStorageStrategy {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
     }
 }
-

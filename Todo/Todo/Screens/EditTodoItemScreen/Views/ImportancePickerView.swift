@@ -26,15 +26,3 @@ struct ImportancePickerView: View {
         .padding()
     }
 }
-
-struct ImportancePickerView_Preview: View {
-    @State private var importance: TodoItem.Importance = .ordinary
-    
-    var body: some View {
-        ImportancePickerView(importance: $importance)
-    }
-}
-
-#Preview {
-    ImportancePickerView_Preview()
-}

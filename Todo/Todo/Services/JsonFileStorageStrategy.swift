@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import CocoaLumberjackSwift
 
 class JSONFileStorageStrategy: FileStorageStrategy {
     func save(data: [TodoItem], to filename: String) {
         guard let fileURL = getDocumentsDirectory()?.appendingPathComponent(filename) else {
-            print("Failed to get documents directory")
+            DDLogError("Documents directory not found")
             return
         }
         let jsonArray: [Any] = data.map { $0.json }
@@ -18,15 +19,15 @@ class JSONFileStorageStrategy: FileStorageStrategy {
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: jsonArray, options: .prettyPrinted)
             try jsonData.write(to: fileURL)
-            print("JSON file saved to: \(fileURL.path)")
+            DDLogInfo("JSON data saved to file \(filename)")
         } catch {
-            print("Failed to save JSON file: \(error)")
+            DDLogError("Error occurred while saving JSON data to file \(filename)\n\(error)")
         }
     }
     
     func load(from filename: String) -> [TodoItem] {
         guard let fileURL = getDocumentsDirectory()?.appendingPathComponent(filename) else {
-            print("Failed to get documents directory")
+            DDLogError("Documents directory not found")
             return []
         }
         var data: [TodoItem] = []
@@ -40,9 +41,9 @@ class JSONFileStorageStrategy: FileStorageStrategy {
                     }
                 }
             }
-            print("JSON file loaded from: \(fileURL.path)")
+            DDLogInfo("JSON data loaded from file \(filename)")
         } catch {
-            print("Failed to load JSON file: \(error)")
+            DDLogError("Error occurred while loading JSON data from file \(filename)\n\(error)")
         }
         return data
     }

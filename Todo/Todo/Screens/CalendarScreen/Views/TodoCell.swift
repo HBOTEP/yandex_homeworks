@@ -47,7 +47,7 @@ final class TodoCell: UITableViewCell {
     // MARK: - Configuration
     func configure(with model: TodoItem) {
         if model.done {
-            let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: model.text)
+            let attributedString = NSMutableAttributedString(string: model.text)
             attributedString.addAttribute(
                 NSAttributedString.Key.strikethroughStyle,
                 value: 2,

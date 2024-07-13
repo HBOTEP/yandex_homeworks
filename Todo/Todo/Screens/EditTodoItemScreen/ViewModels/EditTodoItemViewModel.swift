@@ -27,7 +27,7 @@ final class EditTodoItemViewModel: ObservableObject {
         self.myDoingsViewModel = myDoingsViewModel
         self.text = todoItem?.text ?? ""
         self.importance = todoItem?.importance ?? .ordinary
-        self.deadline = todoItem?.deadline ?? nil
+        self.deadline = todoItem?.deadline
         self.isPickerShown = false
         self.deadlineOn = todoItem?.deadline != nil
         self.selectedColor = Color(hex: todoItem?.hex ?? "F0171")
