@@ -10,6 +10,7 @@
 		1608006E57ABFF13F7A7E707 /* Pods_Todo_TodoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 582910CB609E5BE0A7EACB3D /* Pods_Todo_TodoUITests.framework */; };
 		5239ED852C41CBEB001D236D /* CustomColorPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 5239ED842C41CBEB001D236D /* CustomColorPicker */; };
 		5239ED872C41E81E001D236D /* URLSession+AsyncDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5239ED862C41E81D001D236D /* URLSession+AsyncDataTask.swift */; };
+		5239ED892C420040001D236D /* URLSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5239ED882C420040001D236D /* URLSessionTests.swift */; };
 		5296A3142C2EA82900312885 /* MyDoingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3132C2EA82900312885 /* MyDoingsView.swift */; };
 		5296A3162C2EABCE00312885 /* MyDoingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3152C2EABCE00312885 /* MyDoingsViewModel.swift */; };
 		5296A3192C2EF2F000312885 /* ImportancePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5296A3182C2EF2F000312885 /* ImportancePickerView.swift */; };
@@ -67,6 +68,7 @@
 		1E2F528F709D1FC875011E59 /* Pods-Todo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo.debug.xcconfig"; path = "Target Support Files/Pods-Todo/Pods-Todo.debug.xcconfig"; sourceTree = "<group>"; };
 		1F74BA2E734AF91672644DC0 /* Pods-Todo-TodoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Todo-TodoUITests.release.xcconfig"; path = "Target Support Files/Pods-Todo-TodoUITests/Pods-Todo-TodoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5239ED862C41E81D001D236D /* URLSession+AsyncDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+AsyncDataTask.swift"; sourceTree = "<group>"; };
+		5239ED882C420040001D236D /* URLSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTests.swift; sourceTree = "<group>"; };
 		5296A3132C2EA82900312885 /* MyDoingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDoingsView.swift; sourceTree = "<group>"; };
 		5296A3152C2EABCE00312885 /* MyDoingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDoingsViewModel.swift; sourceTree = "<group>"; };
 		5296A3182C2EF2F000312885 /* ImportancePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportancePickerView.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 			children = (
 				52B03E852C26808A007D8DC9 /* TodoTests.swift */,
 				52B03EAF2C268245007D8DC9 /* TodoItemTests.swift */,
+				5239ED882C420040001D236D /* URLSessionTests.swift */,
 			);
 			path = TodoTests;
 			sourceTree = "<group>";
@@ -611,6 +614,7 @@
 			files = (
 				52B03EB02C268245007D8DC9 /* TodoItemTests.swift in Sources */,
 				52B03E862C26808A007D8DC9 /* TodoTests.swift in Sources */,
+				5239ED892C420040001D236D /* URLSessionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
